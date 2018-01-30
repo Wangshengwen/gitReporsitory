@@ -1,3 +1,3 @@
 # gitReporsitory
 learngit is nessary
-everyon need to study it
+everyone need to study it
