@@ -1,0 +1,2 @@
+# gitReporsitory
+learngit is nessary
