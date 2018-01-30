@@ -1,4 +1,8 @@
 # gitReporsitory
 learngit is nessary
 everyone need to study it
-say goole * simple
+<<<<<<< HEAD
+say goole and simple
+=======
+say goole and simple
+>>>>>>> featurel
