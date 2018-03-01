@@ -65,14 +65,4 @@ public class Girl {
     public void setMoney(Double money) {
         this.money = money;
     }
-
-    @Override
-    public String toString() {
-        return "Girl{" +
-                "id=" + id +
-                ", cupSize='" + cupSize + '\'' +
-                ", age=" + age +
-                ", money=" + money +
-                '}';
-    }
 }

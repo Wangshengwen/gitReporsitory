@@ -1,12 +1,8 @@
 package com.imooc.controller;
 
 import com.imooc.domain.Girl;
-import com.imooc.domain.Result;
 import com.imooc.repository.GirlRepository;
 import com.imooc.service.GirlService;
-import com.imooc.utils.ResultUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +17,6 @@ import java.util.List;
 @RestController
 public class GirlController {
 
-    private final static Logger logger = LoggerFactory.getLogger(GirlController.class);
-
     @Autowired
     private GirlRepository girlRepository;
 
@@ -35,8 +29,6 @@ public class GirlController {
      */
     @GetMapping(value = "/girls")
     public List<Girl> girlList() {
-        logger.info("girlList");
-
         return girlRepository.findAll();
     }
 
@@ -45,15 +37,16 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult) {
+    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
         }
 
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
 
-        return ResultUtil.success(girlRepository.save(girl));
+        return girlRepository.save(girl);
     }
 
     //查询一个女生
@@ -90,10 +83,5 @@ public class GirlController {
     @PostMapping(value = "/girls/two")
     public void girlTwo() {
         girlService.insertTwo();
-    }
-
-    @GetMapping(value = "girls/getAge/{id}")
-    public void getAge(@PathVariable("id") Integer id) throws Exception{
-        girlService.getAge(id);
     }
 }
