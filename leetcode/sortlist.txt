@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ *先分裂再合并思想  归并排序
+ */
+public class Solution {
+    public ListNode sortList(ListNode head) {
+        if(head == null || head.next == null)
+            return head;
+        ListNode l = head;
+        ListNode r = head;
+        while(r.next!=null&&r.next.next!=null){
+            l = l.next;
+            r = r.next.next;
+        }
+        r = sortList(l.next);
+        l.next = null; 
+        l = sortList(head);
+        ListNode rs = mergeList(l,r);
+        return rs;
+        
+    }
+    public ListNode mergeList(ListNode l, ListNode r){
+        ListNode p = l;
+        ListNode q = r;
+        ListNode temp = new ListNode(0);
+        ListNode head = temp;
+        while(p!=null && q!=null){
+            if(p.val < q.val){
+                temp.next = p;
+                temp = temp.next;
+                p = p.next;
+            }else{
+                temp.next = q;
+                temp = temp.next;
+                q = q.next ;
+            }
+        }
+        if(p==null)
+            temp.next = q;
+        else
+            temp.next = p;
+        return head.next;
+    }
+}
